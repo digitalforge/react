@@ -1,23 +1,23 @@
 const data = [
   {
     id: 1,
-    title: "The Lord of the Rings",
-    publicationDate: "1954-07-29",
-    author: "J. R. R. Tolkien",
+    title: 'The Lord of the Rings',
+    publicationDate: '1954-07-29',
+    author: 'J. R. R. Tolkien',
     genres: [
-      "fantasy",
-      "high-fantasy",
-      "adventure",
-      "fiction",
-      "novels",
-      "literature",
+      'fantasy',
+      'high-fantasy',
+      'adventure',
+      'fiction',
+      'novels',
+      'literature',
     ],
     hasMovieAdaptation: true,
     pages: 1216,
     translations: {
-      spanish: "El señor de los anillos",
-      chinese: "魔戒",
-      french: "Le Seigneur des anneaux",
+      spanish: 'El señor de los anillos',
+      chinese: '魔戒',
+      french: 'Le Seigneur des anneaux',
     },
     reviews: {
       goodreads: {
@@ -34,15 +34,15 @@ const data = [
   },
   {
     id: 2,
-    title: "The Cyberiad",
-    publicationDate: "1965-01-01",
-    author: "Stanislaw Lem",
+    title: 'The Cyberiad',
+    publicationDate: '1965-01-01',
+    author: 'Stanislaw Lem',
     genres: [
-      "science fiction",
-      "humor",
-      "speculative fiction",
-      "short stories",
-      "fantasy",
+      'science fiction',
+      'humor',
+      'speculative fiction',
+      'short stories',
+      'fantasy',
     ],
     hasMovieAdaptation: false,
     pages: 295,
@@ -62,14 +62,14 @@ const data = [
   },
   {
     id: 3,
-    title: "Dune",
-    publicationDate: "1965-01-01",
-    author: "Frank Herbert",
-    genres: ["science fiction", "novel", "adventure"],
+    title: 'Dune',
+    publicationDate: '1965-01-01',
+    author: 'Frank Herbert',
+    genres: ['science fiction', 'novel', 'adventure'],
     hasMovieAdaptation: true,
     pages: 658,
     translations: {
-      spanish: "",
+      spanish: '',
     },
     reviews: {
       goodreads: {
@@ -82,16 +82,16 @@ const data = [
   {
     id: 4,
     title: "Harry Potter and the Philosopher's Stone",
-    publicationDate: "1997-06-26",
-    author: "J. K. Rowling",
-    genres: ["fantasy", "adventure"],
+    publicationDate: '1997-06-26',
+    author: 'J. K. Rowling',
+    genres: ['fantasy', 'adventure'],
     hasMovieAdaptation: true,
     pages: 223,
     translations: {
-      spanish: "Harry Potter y la piedra filosofal",
-      korean: "해리 포터와 마법사의 돌",
-      bengali: "হ্যারি পটার এন্ড দ্য ফিলোসফার্স স্টোন",
-      portuguese: "Harry Potter e a Pedra Filosofal",
+      spanish: 'Harry Potter y la piedra filosofal',
+      korean: '해리 포터와 마법사의 돌',
+      bengali: 'হ্যারি পটার এন্ড দ্য ফিলোসফার্স স্টোন',
+      portuguese: 'Harry Potter e a Pedra Filosofal',
     },
     reviews: {
       goodreads: {
@@ -108,17 +108,17 @@ const data = [
   },
   {
     id: 5,
-    title: "A Game of Thrones",
-    publicationDate: "1996-08-01",
-    author: "George R. R. Martin",
-    genres: ["fantasy", "high-fantasy", "novel", "fantasy fiction"],
+    title: 'A Game of Thrones',
+    publicationDate: '1996-08-01',
+    author: 'George R. R. Martin',
+    genres: ['fantasy', 'high-fantasy', 'novel', 'fantasy fiction'],
     hasMovieAdaptation: true,
     pages: 835,
     translations: {
-      korean: "왕좌의 게임",
-      polish: "Gra o tron",
-      portuguese: "A Guerra dos Tronos",
-      spanish: "Juego de tronos",
+      korean: '왕좌의 게임',
+      polish: 'Gra o tron',
+      portuguese: 'A Guerra dos Tronos',
+      spanish: 'Juego de tronos',
     },
     reviews: {
       goodreads: {
@@ -133,12 +133,185 @@ const data = [
       },
     },
   },
-];
+]
 
 function getBooks() {
-  return data;
+  return data
 }
 
 function getBook(id) {
-  return data.find((d) => d.id === id);
+  return data.find(d => d.id === id)
 }
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0
+
+  return goodreads + librarything
+}
+
+const book = getBook(1)
+const { title, author, pages, genres, publicationDate, hasMovieAdaptation } =
+  book
+const book2 = getBook(2)
+const book3 = getBook(3)
+
+const books = getBooks()
+
+const titles = books.map(book => book.title)
+console.log(titles)
+
+const essentailData = books.map(book => ({
+  title: book.title,
+  author: book.author,
+  reviews: getTotalReviewCount(book),
+}))
+
+console.log(essentailData)
+
+const hasMovieAdapt = books
+  .filter(book => book.pages > 500)
+  .filter(book => book.hasMovieAdaptation)
+  .map(book => book.title)
+
+console.log(hasMovieAdapt)
+
+const adventureBooks = books
+  .filter(book => book.genres.includes('adventure'))
+  .map(book => book.title)
+console.log(adventureBooks)
+
+const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0)
+console.log(pagesAllBooks)
+
+const arr = [4, 2, 1, 5, 3, 6]
+const sortedAscend = arr.slice().sort((a, b) => a - b)
+console.log(sortedAscend)
+
+const sortedDescend = arr.slice().sort((a, b) => b - a)
+console.log(sortedDescend)
+
+const sortedPages = books
+  .slice()
+  .sort((a, b) => b.pages - a.pages)
+  .filter(book => book.pages > 500)
+  .map(book => book.title)
+console.log(sortedPages)
+
+// 1. Add a new book object to array
+const newBook = {
+  id: 6,
+  title: 'The Hobbit',
+  author: 'J. R. R. Tolkien',
+  publicationDate: '1937-09-21',
+}
+
+const booksAfterAdd = [...books, newBook]
+
+//2 Delte a book object from array
+
+const booksAfterDelete = booksAfterAdd.filter(book => book.id !== 3)
+console.log(booksAfterDelete)
+
+
+//3 update a book object in the array
+
+const booksAfterUpdate = booksAfterDelete.map(book => book.id === 1 ? {...book, pages: 1} : book)
+/*
+console.log(hasMovieAdaptation && 'this book has a movie adaptation')
+console.log(hasMovieAdaptation || 'this book does not have a movie adaptation')
+console.log(book2.reviews.librarything.reviewsCount)
+console.log(book2.reviews.librarything.reviewsCount ?? 'No Data')
+// const primaryGenre = genres[0]
+// const secondaryGenre = genres[1]
+
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres
+genres
+otherGenres
+
+const newGenres = [...genres, 'steam punk']
+newGenres
+
+const updatedBook = { ...book, moviePubliationDate: '2001-12-19', pages: 1265 }
+updatedBook
+
+const getYear = str => str.split('-')[0]
+
+const summary = `${title} by ${author} has ${pages} pages and was published in ${getYear(
+  publicationDate
+)}`
+summary
+// console.log(primaryGenre, secondaryGenre)
+
+// ---------------------------- Swap the value of 2 variables -------------------------
+let a = 1
+let b = 2
+;[a, b] = [b, a]
+
+//console.log(a)
+//console.log(b)
+
+//----------------------------- Swap two elements in an array ---------------------
+const colors = ['red', 'green', 'blue', 'black', 'white']
+
+;[colors[0], colors[4]] = [colors[4], colors[0]]
+
+//console.log(colors)
+
+//----------------------------- Assign array elements to variables ---------------------
+
+const colors2 = ['red', 'green', 'blue', 'black', 'white']
+
+const [firstColor, secondColor, thirdColor, ...extraColors] = colors2
+//console.log(firstColor, secondColor, thirdColor)
+//console.log(extraColors)
+
+// ---------------------------- Extract values from object ----------------------------
+// const person1 = {
+//   firstName: 'John',
+//   lastName: 'Doe',
+//   age: 30,
+//   job: 'developer',
+// }
+
+const person2 = {
+  firstName: 'Jake',
+  lastName: 'Forbort',
+  age: 40,
+}
+
+//const { firstName, lastName, age, job = 'unemployed' } = person2
+//console.log(firstName, lastName, age, job)
+
+// ---------------------------- Destructure in functions parameters ----------------------------
+// function displayPerson({ firstName, lastName, age, job = 'unemployed' }) {
+//   console.log(`name: ${firstName} ${lastName}`)
+//   console.log(`age: ${age}`)
+//   console.log(`job: ${job}`)
+// }
+
+// const person3 = {
+//   firstName: 'John',
+//   lastName: 'Doe',
+//   age: 30,
+//   job: 'developer',
+// }
+
+// displayPerson(person2)
+
+// ---------------------------- Arrow Funtions ----------------------------
+
+//console.log(getYear(publicationDate))
+
+// ---------------------------- Optional Chaining ----------------------------
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0
+
+  return goodreads + librarything
+}
+
+//NOTE - getTotalReviewCount(book3)
+console.log(getTotalReviewCount(book3))
+*/
