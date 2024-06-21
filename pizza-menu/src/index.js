@@ -5,7 +5,7 @@ import { pizzaData } from './data.js'
 
 function App() {
   return (
-    <div>
+    <div className='container'>
       <Header />
       <Menu />
       <Footer />
@@ -25,19 +25,15 @@ function Menu() {
   return (
     <div className='menu'>
       <h2>Our Menu</h2>
-
-      <Pizza
-        name='Pizza Margherita'
-        ingredients='Tomato and mozarella'
-        photoName='pizzas/margherita.jpg'
-        price={10}
-      />
-      <Pizza
-        name='Pizza Funghi'
-        ingredients='Tomato, mushrooms'
-        price={12}
-        photoName='pizzas/funghi.jpg'
-      />
+      {pizzaData.length > 0 ? (
+        <ul className='pizzas'>
+          {pizzaData.map(pizza => (
+            <Pizza pizzaObj={pizza} key={pizza.id} />
+          ))}
+        </ul>
+      ) : (
+        <p>No Pizzas Available.</p>
+      )}
     </div>
   )
 }
@@ -55,19 +51,30 @@ function Footer() {
 
   // console.log(`${hour}:${mins}:${seconds}`)
   // return React.createElement('footer', null, "We're currently open")
-  return <footer className='footer'>{new Date().toLocaleTimeString()}</footer>
+  return (
+    <footer className='footer'>
+      {isOpen ? (
+        <div className='order'>
+          <p>We're open until {closedHour}:00. Come visit us or order online</p>
+          <button className='btn'>Order Now</button>
+        </div>
+      ) : (
+        <p>Sorry, we're closed. We open at {openHour}:00</p>
+      )}
+    </footer>
+  )
 }
 
 function Pizza(props) {
   return (
-    <div className='pizza'>
-      <img src={props.photoName} alt={props.name} />
+    <li className='pizza'>
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
       </div>
-    </div>
+    </li>
   )
 }
 
