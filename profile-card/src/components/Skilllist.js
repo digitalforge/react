@@ -1,8 +1,13 @@
-function SkillList(props) {
+function SkillList({ skill, color, level }) {
   return (
-    <span style={{ backgroundColor: props.color }}>
-      {props.skill} {props.emoji}
-    </span>
+    <div className='skill' style={{ backgroundColor: color }}>
+      <span>{skill}</span>
+      <span>
+        {level === 'beginner' && '👶'}
+        {level === 'intermediate' && '👉'}
+        {level === 'advanced' && '💪'}
+      </span>
+    </div>
   )
 }
 

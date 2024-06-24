@@ -1,6 +1,7 @@
 import Avatar from './components/Avatar'
 import Data from './components/Data'
 import SkillList from './components/Skilllist'
+import { skillsList } from './skills'
 
 function App() {
   return (
@@ -9,13 +10,15 @@ function App() {
       <div className='data'>
         <Data />
         <div className='skills'>
-          <SkillList skill='HTML' emoji='💪' color='#d5e2ff' />
-          <SkillList skill='CSS' emoji='💪' color='#d5e2ff' />
-          <SkillList skill='JavaScript' emoji='💪' color='#d5e2ff' />
-          <SkillList skill='React' emoji='👶' color='#d5e2ff' />
-          <SkillList skill='Node.js' emoji='👉' color='#d5e2ff' />
-          <SkillList skill='Express' emoji='😞' color='#d5e2ff' />
-          <SkillList skill='MongoDB' emoji='💪' color='#d5e2ff' />
+          {skillsList.map(skill => {
+            return (
+              <SkillList
+                skill={skill.skill}
+                color={skill.color}
+                level={skill.level}
+              />
+            )
+          })}
         </div>
       </div>
     </div>

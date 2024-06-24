@@ -40,12 +40,14 @@ body {
 .skills {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
-.skills > span {
-  margin: 5px;
+.skill {
   padding: 3px 10px;
   /* border: 1px solid #000; */
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   border-radius: 5px;
 }
