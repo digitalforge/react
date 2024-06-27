@@ -97,3 +97,23 @@ h3 {
 .close:hover {
   color: #7950f2;
 }
+
+/* DATE COUNTER */
+.container {
+  width: 600px;
+  margin: 100px auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 20px;
+}
+.date-steps,
+.date-count {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+}
