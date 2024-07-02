@@ -100,10 +100,9 @@ h3 {
 
 /* DATE COUNTER */
 .container {
-  width: 600px;
   margin: 100px auto;
   display: flex;
-  align-items: center;
+  justify-items: center;
   flex-direction: column;
   flex-wrap: wrap;
   align-content: center;
@@ -111,7 +110,6 @@ h3 {
 }
 .date-steps,
 .date-count {
-  width: 20%;
   display: flex;
   justify-content: space-between;
   justify-items: center;
