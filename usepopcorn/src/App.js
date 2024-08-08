@@ -74,6 +74,8 @@ export default function App() {
       setError('')
       return
     }
+
+    handleCloseMovie()
     // fetchMovies()
 
     const timer = setTimeout(fetchMovies, 500)
@@ -201,7 +203,7 @@ function MovieList({ movies, onSelectMovie }) {
   return (
     <ul className='list list-movies'>
       {movies?.map(movie => (
-        <Movie movie={movie} onSelectMovie={onSelectMovie} />
+        <Movie movie={movie} onSelectMovie={onSelectMovie} key={movie.imdbID} />
       ))}
     </ul>
   )
@@ -245,6 +247,19 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     onCloseMovie()
   }
 
+  useEffect(() => {
+    function callback(e) {
+      if (e.code === 'Escape') {
+        onCloseMovie()
+      }
+    }
+    document.addEventListener('keydown', callback)
+
+    return function () {
+      document.removeEventListener('keydown', callback)
+    }
+  }, [onCloseMovie])
+
   useEffect(
     function () {
       async function getMovieDetails() {
@@ -271,7 +286,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
       //cleanup function
       return function () {
         document.title = 'usePopcorn'
-        console.log(`Clean up effect for movie ${title}`)
+        // console.log(`Clean up effect for movie ${title}`)
       }
     },
     [title]
