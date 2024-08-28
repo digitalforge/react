@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import StarRating from './components/StarRating'
+import { useMovies } from './useMoviesHook'
 
 const average = arr =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0)
@@ -8,11 +9,13 @@ const KEY = 'b83ec059'
 
 export default function App() {
   const [query, setQuery] = useState('')
-  const [movies, setMovies] = useState([])
   const [watched, setWatched] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
+
   const [selectedId, setSelectedId] = useState(null)
+
+  const handleCloseMovie = useCallback(() => setSelectedId(null), [])
+
+  const { movies, isLoading, error } = useMovies(query, handleCloseMovie)
 
   // useEffect(function () {
   //   console.log('After initial Render')
@@ -32,10 +35,6 @@ export default function App() {
     setSelectedId(id === selectedId ? null : id)
   }
 
-  function handleCloseMovie() {
-    setSelectedId(null)
-  }
-
   function handleAddWatch(movie) {
     setWatched(watched => [...watched, movie])
   }
@@ -43,46 +42,6 @@ export default function App() {
   function handleDeleteWatched(id) {
     setWatched(watched => watched.filter(movie => movie.imdbID !== id))
   }
-
-  useEffect(() => {
-    //const controller = new AbortController()
-
-    async function fetchMovies() {
-      try {
-        setError('')
-        setIsLoading(true)
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
-        )
-
-        if (!res.ok)
-          throw new Error('Something went wrong with fetching movies')
-
-        const data = await res.json()
-        if (data.Response === 'False') throw new Error('Movie not found')
-        setMovies(data.Search)
-        setIsLoading(false)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    if (query.length < 3) {
-      setMovies([])
-      setError('')
-      return
-    }
-
-    handleCloseMovie()
-    // fetchMovies()
-
-    const timer = setTimeout(fetchMovies, 500)
-
-    //cleanup function
-    return () => clearTimeout(timer)
-  }, [query])
 
   return (
     <>
