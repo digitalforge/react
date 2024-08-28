@@ -45,7 +45,7 @@ export function useMovies(query, callback) {
 
     //cleanup function
     return () => clearTimeout(timer)
-  }, [query])
+  }, [query, callback])
 
   return { movies, isLoading, error }
 }

@@ -114,6 +114,7 @@ function Search({ query, setQuery }) {
       placeholder='Search movies...'
       value={query}
       onChange={e => setQuery(e.target.value)}
+      id='movieSearch'
     />
   )
 }
