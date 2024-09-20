@@ -1,0 +1,22 @@
+.nav {
+  background-color: orangered;
+}
+
+/* you can't use element selectors you have to use classNames */
+.nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* the global function is used when we want to add a global style from the css module
+In this case we are adding a global style to the active class.
+So now this built in active class in React can now be styled to our liking */
+
+.nav :global(.active) {
+  background-color: green;
+}
+
+:global(.test) {
+  background-color: red;
+}
