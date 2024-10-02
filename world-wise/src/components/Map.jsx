@@ -10,7 +10,7 @@ function Map() {
   return (
     <div className={styles.mapContainer} onClick={() => navigate('form')}>
       <h1>Map</h1>
-      {lat && (
+      {/* {lat && (
         <>
           <h2>Latitude: {lat}</h2>
           <h2>Longitude: {lng}</h2>
@@ -22,7 +22,7 @@ function Map() {
         }}
       >
         Change Position
-      </button>
+      </button> */}
     </div>
   )
 }
