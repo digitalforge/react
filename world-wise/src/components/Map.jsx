@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styles from './Map.module.css'
 import {
   MapContainer,
@@ -13,8 +13,6 @@ import { useCities } from '../contexts/CitiesContext'
 import { useGeolocation } from '../hooks/useGeolocation'
 import Button from '../components/Button'
 import { useUrlPosition } from '../hooks/useUrlPosition'
-
-import Spinner from './Spinner'
 
 function Map() {
   const { cities } = useCities()
