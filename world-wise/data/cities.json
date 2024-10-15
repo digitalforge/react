@@ -47,30 +47,6 @@
         "lng": "-2.13128394200588"
       },
       "id": "98443198"
-    },
-    {
-      "id": "0683",
-      "cityName": "Boston",
-      "country": "United States of America (the)",
-      "emoji": "🇺🇸",
-      "date": "2024-10-14T23:14:34.015Z",
-      "notes": "",
-      "position": {
-        "lat": "41.95489451722692",
-        "lng": "-70.67504882812501"
-      }
-    },
-    {
-      "id": "0a9d",
-      "cityName": "Plymouth",
-      "country": "United States of America (the)",
-      "emoji": "🇺🇸",
-      "date": "2024-10-14T23:15:55.288Z",
-      "notes": "",
-      "position": {
-        "lat": "41.90840946591109",
-        "lng": "-70.68878173828126"
-      }
     }
   ]
 }
