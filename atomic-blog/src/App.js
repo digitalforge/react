@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { faker } from '@faker-js/faker'
-import Test from './Test'
+// import Test from './Test'
 
 function createRandomPost() {
   return {
@@ -169,7 +169,7 @@ function List() {
         ))}
       </ul>
 
-      <Test />
+      {/* <Test /> */}
     </>
   )
 }
