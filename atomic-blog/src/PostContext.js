@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useMemo } from 'react'
 import { faker } from '@faker-js/faker'
 
 // This file can be used as a recipe to create a context for your app. You can copy and paste this file into your project and modify it to fit your needs. You can also use it as a reference to understand how contexts work.
@@ -39,20 +39,17 @@ function PostProvider({ children }) {
     setPosts([])
   }
 
-  return (
-    <PostContext.Provider
-      value={{
-        posts: searchedPosts,
-        onAddPost: handleAddPost,
-        onClearPosts: handleClearPosts,
-        searchQuery,
-        setSearchQuery,
-      }}
-    >
-      {' '}
-      {children}
-    </PostContext.Provider>
-  )
+  const value = useMemo(() => {
+    return {
+      posts: searchedPosts,
+      onAddPost: handleAddPost,
+      onClearPosts: handleClearPosts,
+      searchQuery,
+      setSearchQuery,
+    }
+  }, [searchQuery, searchedPosts])
+
+  return <PostContext.Provider value={value}> {children}</PostContext.Provider>
 }
 
 // CUSTOM HOOK
